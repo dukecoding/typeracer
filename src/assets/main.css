@@ -8,3 +8,16 @@ body {
   background-color: var(--bg-color);
   color: var(--normal-text);
 }
+
+@media screen and (max-width: 1440px) {
+  #app {
+    margin: auto;
+    width: 65%;
+  }
+}
+@media screen and (min-width: 1441px) {
+  #app {
+    margin: auto;
+    width: 35%;
+  }
+}
