@@ -3,6 +3,9 @@
   --normal-text: #fcfbfc;
   --dark-green: #006466;
   --dark-purple: #4d194d;
+
+  --input-f-size: 1.5rem;
+  --input-bg-color: #25344d;
 }
 body {
   background-color: var(--bg-color);
