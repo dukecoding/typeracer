@@ -64,7 +64,6 @@ function start() {
 
 function stop() {
   clearInterval(intervalId.value)
-  console.log(1)
 }
 </script>
 
