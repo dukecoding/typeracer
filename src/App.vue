@@ -2,6 +2,7 @@
 import { computed, ref } from 'vue'
 
 const timer = ref('00:00.00')
+const intervalId = ref(0)
 
 // Some text for testing
 const text = 'Lorem ipsum dolor.'
@@ -30,6 +31,7 @@ function wordCheck() {
     wordsDone++
     wordsDoneToCountPercentage.value += 1
     clear()
+    progressPercentage.value === 100 ? stop() : null
   }
 }
 
@@ -41,7 +43,7 @@ function start() {
   let secondsZero = ''
   let minutesZero = ''
 
-  setInterval(() => {
+  intervalId.value = setInterval(() => {
     miliseconds++
     if (miliseconds === 100) {
       seconds++
@@ -58,6 +60,11 @@ function start() {
 
     timer.value = `${minutesZero}${minutes}:${secondsZero}${seconds}.${milisecondsZero}${miliseconds}`
   }, 10)
+}
+
+function stop() {
+  clearInterval(intervalId.value)
+  console.log(1)
 }
 </script>
 
