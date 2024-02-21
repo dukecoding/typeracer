@@ -1,21 +1,44 @@
 <script setup>
 import { computed, ref } from 'vue'
+import axios from 'axios'
 
 const timer = ref('00:00.00')
 const intervalId = ref(0)
 
-// Some text for testing
-const text = 'Lorem ipsum dolor.'
-const words = text.split(' ')
+const text = ref('Click on input to start ⬆️')
+const words = computed(() => {
+  return text.value.split(' ')
+})
 let wordsDone = 0
 
 const wordsDoneToCountPercentage = ref(0)
 
 const progressPercentage = computed(() => {
-  return Math.floor((wordsDoneToCountPercentage.value / words.length) * 100)
+  return Math.floor(
+    (wordsDoneToCountPercentage.value / words.value.length) * 100
+  )
 })
 
 const inputValue = ref('')
+
+function getRandomNumber(max) {
+  return Math.floor(Math.random() * max)
+}
+
+const API_URL = 'https://type.fit/api/quotes'
+async function fetchText() {
+  const res = await axios
+    .get(API_URL)
+    .then(({ data }) => {
+      // data => array of objects with properties "author" & "text"
+      return data[getRandomNumber(data.length)].text
+    })
+    .catch((err) => {
+      return 'error occurred!'
+    })
+  wordsDone = 0
+  text.value = res
+}
 
 function clear() {
   inputValue.value = ''
@@ -24,10 +47,10 @@ function clear() {
 function wordCheck() {
   // In the last word there's no need for space character
   let space = ' '
-  if (words.length - 1 === wordsDone) {
+  if (words.value.length - 1 === wordsDone) {
     space = ''
   }
-  if (inputValue.value === words[wordsDone] + space) {
+  if (inputValue.value === words.value[wordsDone] + space) {
     wordsDone++
     wordsDoneToCountPercentage.value += 1
     clear()
@@ -36,6 +59,8 @@ function wordCheck() {
 }
 
 function start() {
+  fetchText()
+
   let miliseconds = 0
   let seconds = 0
   let minutes = 0
