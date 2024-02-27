@@ -25,6 +25,7 @@ function getRandomNumber(max) {
     return Math.floor(Math.random() * max)
 }
 
+// This is a free API that contains a few responses, for now it's enough'
 const API_URL = 'https://type.fit/api/quotes'
 async function fetchText() {
     const res = await axios
