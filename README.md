@@ -2,6 +2,8 @@
 
 Typeracer game where you can test your typing skills 🤓
 
+![Typeracer-gameplay-screenshot](public/typeracer-gameplay.png)
+
 ## How to play
 
 1. Click at the input field to start the game
