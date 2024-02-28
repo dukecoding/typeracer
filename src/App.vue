@@ -31,13 +31,15 @@ async function fetchText() {
     const res = await axios
         .get(API_URL)
         .then(({ data }) => {
+            wordsDoneToCountPercentage.value = 0
+            wordsDone = 0
             // data => array of objects with properties "author" & "text"
             return data[getRandomNumber(data.length)].text
         })
         .catch((err) => {
             return 'error occurred!'
         })
-    wordsDone = 0
+    // wordsDone = 0
     text.value = res
 }
 
